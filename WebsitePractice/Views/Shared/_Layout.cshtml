@@ -52,6 +52,10 @@
         </div>
     </footer>
 
+    <div id="applicationModals" class="modal" tabindex="-1" role="dialog">
+
+    </div>
+    @*END OF BODY*@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -71,7 +75,6 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

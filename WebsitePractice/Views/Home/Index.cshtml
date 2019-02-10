@@ -1,8 +1,52 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Customer Listing";
+}
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead class="thead">
+        <tr>
+            <th scope="col">Customer ID</th>
+            <th scope="col">First Name</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<button id="Create" type="button" class="btn btn-primary" data-toggle="modal">
+    Enter New Customers
+</button>
+
+<button id="Read" type="button" class="btn btn-primary" data-toggle="modal">
+    Display Customer Data
+</button>
+
+@section scripts
+    {
+    <script>
+        $("#Create").on("click", function () {
+            $.ajax({
+                url: '@Url.Action("OpenCreatePartial", "Home")',
+                method: 'GET',
+            }).done(function (result) {
+                processResult(result);
+            });
+        });
+
+         $("#Read").on("click", function () {
+            $.ajax({
+                url: '@Url.Action("OpenReadPartial", "Home")',
+                method: 'GET',
+            }).done(function (result) {
+                processResult(result);
+            });
+        });
+
+        function processResult(result) {
+            $('#applicationModals').html(result);
+            $('#applicationModals').modal('show');
+        }
+    </script>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
