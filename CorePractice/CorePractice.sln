@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsitePractice", "WebsitePractice\WebsitePractice.csproj", "{9D800DF3-2AB8-4420-8555-59E6F1E147A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorePractice.Website", "WebsitePractice\CorePractice.Website.csproj", "{9D800DF3-2AB8-4420-8555-59E6F1E147A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorePractice.Api", "CorePractice.Api\CorePractice.Api.csproj", "{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9D800DF3-2AB8-4420-8555-59E6F1E147A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D800DF3-2AB8-4420-8555-59E6F1E147A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D800DF3-2AB8-4420-8555-59E6F1E147A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
