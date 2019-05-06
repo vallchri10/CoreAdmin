@@ -1,5 +1,12 @@
-CREATE PROCEDURE [dbo].[Read]
-    @CustomerID VARCHAR(10),
+USE [CoreDatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[Read]    Script Date: 5/5/2019 6:52:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Read]
+    @CustomerID NVARCHAR(10),
     @ERROR int output
 AS
 

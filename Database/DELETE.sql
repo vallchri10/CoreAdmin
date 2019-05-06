@@ -1,4 +1,11 @@
-CREATE PROCEDURE [dbo].[Delete]
+USE [CoreDatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[Delete]    Script Date: 5/5/2019 6:52:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Delete]
     @CustomerID VARCHAR(10),
     @ERROR int output
 AS
