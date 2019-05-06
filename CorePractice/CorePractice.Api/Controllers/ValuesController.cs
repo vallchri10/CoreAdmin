@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CorePractice.Api.Controllers;
+using CorePractice.Api.Models;
 
 namespace CorePractice.Api.Controllers
 {
@@ -14,6 +16,12 @@ namespace CorePractice.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            CoreEntities a = new CoreEntities();
+            Customers b = new Customers();
+            b.FirstName = "test";
+            b.CustomerId = "1111111113";
+            a.Customers.Add(b);
+            a.SaveChanges(); 
             return new string[] { "value1", "value2" };
         }
 
