@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CorePractice.Api.Models
+namespace CorePractice.Data.DataSources
 {
     public partial class CoreEntities : DbContext
     {
-        public CoreEntities()
-        {
-        }
+        //public CoreEntities()
+        //{
+        //}
 
         public CoreEntities(DbContextOptions<CoreEntities> options)
             : base(options)
@@ -17,13 +17,14 @@ namespace CorePractice.Api.Models
 
         public virtual DbSet<Customers> Customers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=ISMAELRIG;Database=CoreDatabase; Integrated Security=True; ");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Data Source=ISMAELRIG;Database=CoreDatabase; Integrated Security=True; ");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CorePractice.Api.Models
+namespace CorePractice.Data.DataSources
 {
     public partial class Customers
     {
