@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-
-using CorePractice.Data.DataSources;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using System.Data;
-using System;
 
+using CorePractice.Data.DataSources;
 
 namespace CorePractice.Api.Controllers
 {
@@ -16,44 +13,33 @@ namespace CorePractice.Api.Controllers
     public class CustomerController : ControllerBase
     {
 
-        private readonly CoreEntities _context; 
+        private readonly CoreEntities _context;
 
         public CustomerController(CoreEntities context)
         {
-            _context = context; 
+            _context = context;
         }
 
         [HttpGet]
-        public ActionResult Customer_ReadAll()
+        public ActionResult Customers_Read()
         {
-            return Ok(_context.Customers.ToList());
+            const string SQL_COMMAND = "EXEC [dbo].[Customers_Read]";
+            var Result = _context.Set<Customers>().FromSql(SQL_COMMAND).ToList();
+            return Ok(Result);
         }
 
         [HttpGet("{CustomerID}")]
         public ActionResult Customer_Read(string CustomerID)
         {
-            return Ok(_context.Customers.Find(CustomerID));
+            var ParameterizedCustomerID = new SqlParameter("@CustomerID", CustomerID);
+            var ParameterizedROWCOUNT = new SqlParameter("@ROWCOUNT", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output,
+            };
+            const string SQL_COMMAND = "EXEC [dbo].[Customer_Read] @CustomerID, @ROWCOUNT OUTPUT";
+            var Result = _context.Set<Customers>().FromSql(SQL_COMMAND, ParameterizedCustomerID, ParameterizedROWCOUNT).FirstOrDefault();
+            var ROWCOUNT = ParameterizedROWCOUNT.Value.ToString();
+            return Ok(Result);
         }
-
-
-        //[HttpGet, Route("niceOne/{CustomerID}")]
-        //public ActionResult SP(string CustomerID)
-        //{
-        //    var Customer = _context.Customers.FromSql("[dbo].[Read] @p0", CustomerID)
-        //    .FirstOrDefault();
-
-        //    return Ok(Customer);
-        //}
-
-        [HttpGet, Route("niceOne/{CustomerID}")]
-        public ActionResult SP(string CustomerID)
-        {
-            var Customer = _context.Customers.FromSql("[dbo].[Read] @p0", CustomerID)
-            .FirstOrDefault();
-
-            return Ok(Customer);
-        }
-
-
     }
 }

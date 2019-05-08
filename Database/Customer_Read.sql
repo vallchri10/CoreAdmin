@@ -1,0 +1,18 @@
+CREATE PROCEDURE [dbo].[Customer_Read]
+	@CustomerID NVARCHAR(10),
+	@ROWCOUNT INT OUTPUT
+
+AS
+
+SET NOCOUNT ON
+BEGIN
+	SELECT *
+	FROM [dbo].Customers
+	WHERE CustomerID = @CustomerID
+END
+
+
+IF(@@ROWCOUNT > 0)
+   SET @ROWCOUNT = 0
+ELSE
+   SET @ROWCOUNT = -1
