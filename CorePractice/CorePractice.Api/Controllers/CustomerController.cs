@@ -3,6 +3,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using System.Data;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using CorePractice.Data.DataSources;
 
@@ -21,11 +23,10 @@ namespace CorePractice.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult Customers_Read()
+        public async Task<ActionResult<List<Customers>>> Customers_Read()
         {
             const string SQL_COMMAND = "EXEC [dbo].[Customers_Read]";
-            var Result = _context.Set<Customers>().FromSql(SQL_COMMAND).ToList();
-            return Ok(Result);
+            return await _context.Set<Customers>().FromSql(SQL_COMMAND).ToListAsync();
         }
 
         [HttpGet("{CustomerID}")]
