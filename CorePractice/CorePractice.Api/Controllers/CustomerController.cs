@@ -4,6 +4,10 @@ using System.Linq;
 
 using CorePractice.Data.DataSources;
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+using System.Data;
+using System;
+
 
 namespace CorePractice.Api.Controllers
 {
@@ -19,30 +23,37 @@ namespace CorePractice.Api.Controllers
             _context = context; 
         }
 
-
-
-
         [HttpGet]
         public ActionResult Customer_ReadAll()
         {
-            var nice = _context.Customers.ToList();
-            return Ok(nice);
-                
-
-
-            //using (CoreEntities db = new CoreEntities())
-            //{
-            //    return Ok(db.Customers.ToList()); 
-            //}
+            return Ok(_context.Customers.ToList());
         }
 
-        //[HttpGet("{CustomerID}")]
-        //public ActionResult Customer_Read(string CustomerID)
+        [HttpGet("{CustomerID}")]
+        public ActionResult Customer_Read(string CustomerID)
+        {
+            return Ok(_context.Customers.Find(CustomerID));
+        }
+
+
+        //[HttpGet, Route("niceOne/{CustomerID}")]
+        //public ActionResult SP(string CustomerID)
         //{
-        //    //using (CoreEntities db = new CoreEntities())
-        //    //{
-        //    //    return Ok(db.Customers.Find(CustomerID));
-        //    //}
+        //    var Customer = _context.Customers.FromSql("[dbo].[Read] @p0", CustomerID)
+        //    .FirstOrDefault();
+
+        //    return Ok(Customer);
         //}
+
+        [HttpGet, Route("niceOne/{CustomerID}")]
+        public ActionResult SP(string CustomerID)
+        {
+            var Customer = _context.Customers.FromSql("[dbo].[Read] @p0", CustomerID)
+            .FirstOrDefault();
+
+            return Ok(Customer);
+        }
+
+
     }
 }
