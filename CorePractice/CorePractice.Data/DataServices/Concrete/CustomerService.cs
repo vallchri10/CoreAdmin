@@ -7,8 +7,8 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 using AutoMapper;
-using CorePractice.Domain.Models; 
-
+using CorePractice.Domain.Models;
+using System;
 
 namespace CorePractice.Data.DataServices.Concrete
 {
@@ -42,6 +42,24 @@ namespace CorePractice.Data.DataServices.Concrete
             var ReturnCode = ParameterizedReturnCode.Value.ToString();
 
             return _mapper.Map<Customer>(Result);
+        }
+
+        public async Task Customer_Create(Customer CustomerDomain)
+        {
+            var CustomerID = new SqlParameter("@CustomerID", CustomerDomain.CustomerID);
+            var FirstName = new SqlParameter("@FirstName", CustomerDomain.FirstName);
+            var LastName = new SqlParameter("@LastName", CustomerDomain.LastName);
+            var DateOfBirth = new SqlParameter("@DateOfBirth", CustomerDomain.DateOfBirth);
+            var Address = new SqlParameter("@Address", CustomerDomain.Address);
+
+            try
+            {
+                _context.Database.ExecuteSqlCommandAsync(SPCommands.Customer_Create,CustomerID, FirstName, LastName, DateOfBirth, Address).Wait(); 
+            }
+            catch(Exception ex)
+            {
+                throw new DbUpdateException("test",ex);
+            }
         }
     }
 }

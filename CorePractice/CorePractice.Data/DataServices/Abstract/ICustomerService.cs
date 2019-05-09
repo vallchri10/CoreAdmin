@@ -8,6 +8,7 @@ namespace CorePractice.Data.DataServices.Abstract
     public interface ICustomerService
     {
         Task<List<Customer>> Customers_Read();
-        Task<Customer> Customer_Read(string CustomerID); 
+        Task<Customer> Customer_Read(string CustomerID);
+        Task Customer_Create(Customer CustomerDomain); 
     }
 }
