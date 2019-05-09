@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using CorePractice.Data.DataSources;
 using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Data.DataServices.Concrete;
+using AutoMapper;
+using CorePractice.Domain.Models;
 
 namespace CorePractice.Api
 {
@@ -23,6 +25,12 @@ namespace CorePractice.Api
         
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CustomerEntity, Customer>();
+            });
+            services.AddSingleton(config.CreateMapper());
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<CoreContext>(

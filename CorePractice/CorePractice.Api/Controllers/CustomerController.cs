@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
-using CorePractice.Data.DataSources;
 using CorePractice.Data.DataServices.Abstract;
+using CorePractice.Domain.Models;
 
 namespace CorePractice.Api.Controllers
 {
@@ -19,14 +18,14 @@ namespace CorePractice.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CustomerEntity>>> Customers_Read()
+        public async Task<ActionResult<List<Customer>>> Customers_Read()
         {
            return await _customerService.Customers_Read(); 
 
         }
 
         [HttpGet("{CustomerID}")]
-        public async Task<ActionResult<CustomerEntity>> Customer_Read(string CustomerID)
+        public async Task<ActionResult<Customer>> Customer_Read(string CustomerID)
         {
             return await _customerService.Customer_Read(CustomerID); 
         }
