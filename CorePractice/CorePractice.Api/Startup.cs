@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using CorePractice.Data.DataSources; 
+using CorePractice.Data.DataSources;
+using CorePractice.Data.DataServices.Abstract;
+using CorePractice.Data.DataServices.Concrete;
 
 namespace CorePractice.Api
 {
@@ -26,6 +28,8 @@ namespace CorePractice.Api
             services.AddDbContext<CoreEntities>(
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("RigConnection")));
+
+            services.AddScoped<ICustomerService, CustomerService>(); 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

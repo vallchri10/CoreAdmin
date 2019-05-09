@@ -1,6 +1,5 @@
 CREATE PROCEDURE [dbo].[Customer_Read]
-	@CustomerID NVARCHAR(10),
-	@ROWCOUNT INT OUTPUT
+	@CustomerID NVARCHAR(10)
 
 AS
 
@@ -11,8 +10,7 @@ BEGIN
 	WHERE CustomerID = @CustomerID
 END
 
-
 IF(@@ROWCOUNT > 0)
-   SET @ROWCOUNT = 0
+	RETURN 1
 ELSE
-   SET @ROWCOUNT = -1
+	RETURN 0

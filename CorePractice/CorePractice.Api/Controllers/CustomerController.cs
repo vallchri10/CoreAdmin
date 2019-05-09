@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
-using System.Data;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using CorePractice.Data.DataSources;
+using CorePractice.Data.DataServices.Abstract;
 
 namespace CorePractice.Api.Controllers
 {
@@ -14,33 +11,24 @@ namespace CorePractice.Api.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private readonly ICustomerService _customerService;
 
-        private readonly CoreEntities _context;
-
-        public CustomerController(CoreEntities context)
+        public CustomerController(ICustomerService customerService)
         {
-            _context = context;
+            _customerService = customerService; 
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Customers>>> Customers_Read()
         {
-            const string SQL_COMMAND = "EXEC [dbo].[Customers_Read]";
-            return await _context.Set<Customers>().FromSql(SQL_COMMAND).ToListAsync();
+           return await _customerService.Customers_Read(); 
+
         }
 
         [HttpGet("{CustomerID}")]
-        public ActionResult Customer_Read(string CustomerID)
+        public async Task<ActionResult<Customers>> Customer_Read(string CustomerID)
         {
-            var ParameterizedCustomerID = new SqlParameter("@CustomerID", CustomerID);
-            var ParameterizedROWCOUNT = new SqlParameter("@ROWCOUNT", SqlDbType.Int)
-            {
-                Direction = ParameterDirection.Output,
-            };
-            const string SQL_COMMAND = "EXEC [dbo].[Customer_Read] @CustomerID, @ROWCOUNT OUTPUT";
-            var Result = _context.Set<Customers>().FromSql(SQL_COMMAND, ParameterizedCustomerID, ParameterizedROWCOUNT).FirstOrDefault();
-            var ROWCOUNT = ParameterizedROWCOUNT.Value.ToString();
-            return Ok(Result);
+            return await _customerService.Customer_Read(CustomerID); 
         }
     }
 }
