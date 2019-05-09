@@ -10,9 +10,9 @@ namespace CorePractice.Data.DataServices.Concrete
 {
     public class CustomerService : ICustomerService
     {
-        private readonly CoreEntities _context;
+        private readonly CoreContext _context;
 
-        public CustomerService(CoreEntities context)
+        public CustomerService(CoreContext context)
         {
             _context = context;
         }

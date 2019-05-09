@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CorePractice.Data.DataSources
 {
-    public partial class CoreEntities : DbContext
+    public partial class CoreContext : DbContext
     {
-        public CoreEntities(DbContextOptions<CoreEntities> options)
+        public CoreContext(DbContextOptions<CoreContext> options)
             : base(options)
         {
         }

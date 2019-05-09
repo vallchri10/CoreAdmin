@@ -25,7 +25,7 @@ namespace CorePractice.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<CoreEntities>(
+            services.AddDbContext<CoreContext>(
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("RigConnection")));
 
