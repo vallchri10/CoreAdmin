@@ -19,14 +19,14 @@ namespace CorePractice.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Customers>>> Customers_Read()
+        public async Task<ActionResult<List<CustomerEntity>>> Customers_Read()
         {
            return await _customerService.Customers_Read(); 
 
         }
 
         [HttpGet("{CustomerID}")]
-        public async Task<ActionResult<Customers>> Customer_Read(string CustomerID)
+        public async Task<ActionResult<CustomerEntity>> Customer_Read(string CustomerID)
         {
             return await _customerService.Customer_Read(CustomerID); 
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CorePractice.Data.DataSources
 {
-    public partial class Customers
+    public partial class CustomerEntity
     {
         public string CustomerId { get; set; }
         public string FirstName { get; set; }

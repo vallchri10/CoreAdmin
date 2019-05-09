@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorePractice.Website", "Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorePractice.Api", "CorePractice.Api\CorePractice.Api.csproj", "{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorePractice.Data", "CorePractice.Data\CorePractice.Data.csproj", "{157571F5-10A0-4692-AE97-0947E7168AA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorePractice.Data", "CorePractice.Data\CorePractice.Data.csproj", "{157571F5-10A0-4692-AE97-0947E7168AA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorePractice.Domain", "CorePractice.Domain\CorePractice.Domain.csproj", "{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{157571F5-10A0-4692-AE97-0947E7168AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{157571F5-10A0-4692-AE97-0947E7168AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{157571F5-10A0-4692-AE97-0947E7168AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

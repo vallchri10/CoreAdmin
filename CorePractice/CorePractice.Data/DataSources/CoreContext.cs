@@ -11,13 +11,13 @@ namespace CorePractice.Data.DataSources
         {
         }
 
-        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<CustomerEntity> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity<Customers>(entity =>
+            modelBuilder.Entity<CustomerEntity>(entity =>
             {
                 entity.HasKey(e => e.CustomerId);
 

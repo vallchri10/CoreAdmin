@@ -17,12 +17,12 @@ namespace CorePractice.Data.DataServices.Concrete
             _context = context;
         }
 
-        public async Task<List<Customers>> Customers_Read()
+        public async Task<List<CustomerEntity>> Customers_Read()
         { 
-           return await _context.Set<Customers>().FromSql(SQLCommands.Customers_Read).ToListAsync();
+           return await _context.Set<CustomerEntity>().FromSql(SPCommands.Customers_Read).ToListAsync();
         }
 
-        public async Task<Customers> Customer_Read(string CustomerID)
+        public async Task<CustomerEntity> Customer_Read(string CustomerID)
         {
             var ParameterizedCustomerID = new SqlParameter("@CustomerID", CustomerID);
             var ParameterizedReturnCode = new SqlParameter("@ReturnCode", SqlDbType.Int)
@@ -30,7 +30,7 @@ namespace CorePractice.Data.DataServices.Concrete
                 Direction = ParameterDirection.Output
             };
 
-            var Result = await _context.Set<Customers>().FromSql(SQLCommands.Customer_Read, ParameterizedCustomerID, ParameterizedReturnCode).FirstOrDefaultAsync();
+            var Result = await _context.Set<CustomerEntity>().FromSql(SPCommands.Customer_Read, ParameterizedCustomerID, ParameterizedReturnCode).FirstOrDefaultAsync();
             var ReturnCode = ParameterizedReturnCode.Value.ToString();
 
             return Result; 
