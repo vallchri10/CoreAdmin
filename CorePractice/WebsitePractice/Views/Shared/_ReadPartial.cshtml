@@ -7,11 +7,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>READ MODAL</p>
+                <p id="test"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button id="Search" type="button" class="btn btn-primary">Search</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+
+<script>
+    $("#Search").on("click", function () {
+        $.ajax({
+            url: 'https://localhost:5001/api/Customer',
+            method: 'GET',
+        }).done(function (result) {
+            processResult(result);
+        });
+    });
+
+    function processResult(result) {
+        $('#test').html(result);
+        alert(JSON.stringify(result));
+    }
+
+
+
+
+</script>

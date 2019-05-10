@@ -24,7 +24,7 @@ namespace CorePractice.Data.DataServices.Concrete
             _mapper = mapper; 
         }
 
-        public async Task<List<Customer>> Customers_Read()
+        public async Task<IEnumerable<Customer>> Customers_Read()
         {
             var Result = await _context.Set<CustomerEntity>().FromSql(SPCommands.Customers_Read).ToListAsync();
             return _mapper.Map<List<Customer>>(Result);

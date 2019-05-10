@@ -37,7 +37,12 @@ namespace CorePractice.Api
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("RigConnection")));
 
-            services.AddScoped<ICustomerService, CustomerService>(); 
+            services.AddScoped<ICustomerService, CustomerService>();
+
+
+            services.AddCors();
+
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -52,6 +57,14 @@ namespace CorePractice.Api
             }
 
             app.UseHttpsRedirection();
+
+
+
+            app.UseCors(
+      options => options.WithOrigins("http://localhost:64020").AllowAnyMethod()
+  );
+
+
             app.UseMvc();
         }
     }
