@@ -25,23 +25,23 @@
     </div>
 
 <script>
-    $("#Search").on("click", function () {
-        $.ajax({
-            url: 'https://localhost:5001/api/Customer',
-            method: 'GET',
-        }).done(function (result) {
-            processResult(result);
-        });
-    });
+    //$("#Search").on("click", function () {
+    //    $.ajax({
+    //        url: 'https://localhost:5001/api/Customer',
+    //        method: 'GET',
+    //    }).done(function (result) {
+    //        processResult(result);
+    //    });
+    //});
 
-    function processResult(result) {
-        var tr;
-        for (var i = 0; i < result.length; i++) {
-            tr = $('<tr/>');
-            tr.append("<td>" + result[i].customerID+ "</td>");
-            tr.append("<td>" + result[i].firstName+ "</td>");
-            tr.append("<td>" + result[i].lastName + "</td>");
-            $('table').append(tr);
-        }
-    }
+    //function processResult(result) {
+    //    var tr;
+    //    for (var i = 0; i < result.length; i++) {
+    //        tr = $('<tr/>');
+    //        tr.append("<td>" + result[i].customerID+ "</td>");
+    //        tr.append("<td>" + result[i].firstName+ "</td>");
+    //        tr.append("<td>" + result[i].lastName + "</td>");
+    //        $('table').append(tr);
+    //    }
+    //}
 </script>

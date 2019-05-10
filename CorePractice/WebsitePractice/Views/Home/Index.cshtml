@@ -29,7 +29,6 @@
             $.ajax({
                 url: '@Url.Action("OpenReadPartial", "Home")',
                 method: 'GET',
-                data: "1",
             }).done(function (result) {
                 processResult(result);
             });
