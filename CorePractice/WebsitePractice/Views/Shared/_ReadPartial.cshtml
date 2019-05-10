@@ -7,7 +7,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p id="test"></p>
+
+                <table>
+                    <tr>
+                        <th>User_Name</th>
+                        <th>score</th>
+                        <th>team</th>
+                    </tr>
+                </table>
+
             </div>
             <div class="modal-footer">
                 <button id="Search" type="button" class="btn btn-primary">Search</button>
@@ -27,11 +35,13 @@
     });
 
     function processResult(result) {
-        $('#test').html(result);
-        alert(JSON.stringify(result));
+        var tr;
+        for (var i = 0; i < result.length; i++) {
+            tr = $('<tr/>');
+            tr.append("<td>" + result[i].customerID+ "</td>");
+            tr.append("<td>" + result[i].firstName+ "</td>");
+            tr.append("<td>" + result[i].lastName + "</td>");
+            $('table').append(tr);
+        }
     }
-
-
-
-
 </script>
