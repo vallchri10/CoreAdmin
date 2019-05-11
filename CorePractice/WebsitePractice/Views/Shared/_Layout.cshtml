@@ -4,13 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebsitePractice</title>
-    
-    @await Html.PartialAsync("_StylesPartial")
+    <partial name="_StylesPartial" />
 </head>
 <body>
-    @RenderBody()
-    <div id="applicationModals" class="modal" tabindex="-1" role="dialog"></div>
-    @RenderSection("Scripts", required: false)
-    @await Html.PartialAsync("_ScriptsPartial")
+    <div class="wrapper ">
+        <partial name="_SidebarPartial" />
+        <div class="main-panel">
+            <partial name="_NavbarPartial" />
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+            <partial name="_FooterPartial" />
+
+        </div>
+
+
+         
+        </div>
+        <div id="applicationModals" class="modal" tabindex="-1" role="dialog"></div>
+        @RenderSection("Scripts", required: false)
+        <partial name="_ScriptsPartial" />
 </body>
 </html>

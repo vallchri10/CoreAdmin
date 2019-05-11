@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\fonts\nucleo.woff2" />
     <None Include="wwwroot\lib\bootstrap\js\bootstrap.js" />
     <None Include="wwwroot\lib\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
