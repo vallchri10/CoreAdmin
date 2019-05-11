@@ -9,6 +9,7 @@ namespace CorePractice.Data.DataServices.Abstract
     {
         Task<IEnumerable<Customer>> Customers_Read();
         Task<Customer> Customer_Read(string CustomerID);
-        Task Customer_Create(Customer CustomerDomain); 
+        Task Customer_Create(Customer CustomerDomain);
+        Task Customer_Update(Customer CustomerDomain);
     }
 }

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-
 using AutoMapper;
-using CorePractice.Domain.Models;
 using System;
+
+using CorePractice.Domain.Models;
 
 namespace CorePractice.Data.DataServices.Concrete
 {
@@ -16,7 +16,6 @@ namespace CorePractice.Data.DataServices.Concrete
     {
         private readonly CoreContext _context;
         private readonly IMapper _mapper;
-
 
         public CustomerService(CoreContext context, IMapper mapper)
         {
@@ -52,14 +51,23 @@ namespace CorePractice.Data.DataServices.Concrete
             var DateOfBirth = new SqlParameter("@DateOfBirth", CustomerDomain.DateOfBirth);
             var Address = new SqlParameter("@Address", CustomerDomain.Address);
 
-            try
+            await _context.Database.ExecuteSqlCommandAsync(SPCommands.Customer_Create, CustomerID, FirstName, LastName, DateOfBirth, Address);
+        }
+
+        public async Task Customer_Update(Customer CustomerDomain)
+        {
+            var CustomerID = new SqlParameter("@CustomerID", CustomerDomain.CustomerID);
+            var FirstName = new SqlParameter("@FirstName", CustomerDomain.FirstName);
+            var LastName = new SqlParameter("@LastName", CustomerDomain.LastName);
+            var DateOfBirth = new SqlParameter("@DateOfBirth", CustomerDomain.DateOfBirth);
+            var Address = new SqlParameter("@Address", CustomerDomain.Address);
+
+            var ParameterizedReturnCode = new SqlParameter("@ReturnCode", SqlDbType.Int)
             {
-                _context.Database.ExecuteSqlCommandAsync(SPCommands.Customer_Create,CustomerID, FirstName, LastName, DateOfBirth, Address).Wait(); 
-            }
-            catch(Exception ex)
-            {
-                throw new DbUpdateException("test",ex);
-            }
+                Direction = ParameterDirection.Output
+            };
+
+            await _context.Database.ExecuteSqlCommandAsync(SPCommands.Customer_Update, CustomerID, FirstName, LastName, DateOfBirth, Address, ParameterizedReturnCode);
         }
     }
 }

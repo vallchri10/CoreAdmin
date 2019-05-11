@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Domain.Models;
+using System.Data.SqlClient;
 
 namespace CorePractice.Api.Controllers
 {
@@ -40,11 +41,37 @@ namespace CorePractice.Api.Controllers
             {
                 await _customerService.Customer_Create(CustomerDomain);
             }
-            catch (DbUpdateException)
+            catch (SqlException)
             {
-                return Conflict();
+                return Conflict(new { message = $"An existing record with the id '{CustomerDomain.CustomerID}' was already found." });
             }
             return CreatedAtAction("Customer_Read", new { CustomerID = CustomerDomain.CustomerID }, CustomerDomain);
+        }
+
+        [HttpPut("{CustomerID}")]
+        public async Task<IActionResult> Customer_Update(string CustomerID, Customer CustomerDomain)
+        {
+            if (CustomerID != CustomerDomain.CustomerID)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _customerService.Customer_Update(CustomerDomain); 
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 51000)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
         }
     }
 }
