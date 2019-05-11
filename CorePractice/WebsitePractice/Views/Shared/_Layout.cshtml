@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebsitePractice</title>
-    @await Html.PartialAsync("_StylesScriptsPartial")
+    
+    @await Html.PartialAsync("_StylesPartial")
 </head>
 <body>
     @RenderBody()
     <div id="applicationModals" class="modal" tabindex="-1" role="dialog"></div>
     @RenderSection("Scripts", required: false)
+    @await Html.PartialAsync("_ScriptsPartial")
 </body>
 </html>

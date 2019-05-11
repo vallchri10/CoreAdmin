@@ -3,24 +3,22 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Remove="wwwroot\lib\bootstrap\js\bootstrap.js" />
     <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lib\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
-    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="wwwroot\lib\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\lib\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation\additional-methods.js" />
     <None Include="wwwroot\lib\jquery-validation\jquery.validate.js" />
     <None Include="wwwroot\lib\jquery\jquery.js" />
+    <None Include="wwwroot\lib\popper.js\popper.js" />
   </ItemGroup>
 
 
