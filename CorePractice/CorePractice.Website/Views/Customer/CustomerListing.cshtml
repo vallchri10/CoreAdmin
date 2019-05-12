@@ -35,26 +35,25 @@
 @section scripts
     {
 <script>
-        $(function () {
-            $.ajax({
-                url: 'https://localhost:44395/api/Customer',
-                method: 'GET',
-            }).done(function (result) {
-                processResult(result);
-            });
-        });
+    $(function () {
+        Customers_Read(); 
+    });
 
-        function processResult(result) {
-            var tr;
-            for (var i = 0; i < result.length; i++) {
-                tr = $('<tr/>');
-                //tr.append("<td>" + result[i].customerID + "</td>");
-                tr.append("<td><a href="+"/Customer/CustomerUpdate/"+result[i].customerID+">"+result[i].customerID+"</a></td>");
-                tr.append("<td>" + result[i].firstName + " " + result[i].lastName + "</td>");
-                //tr.append("<td>" + result[i].lastName + "</td>");
-                tr.append("<td>" + result[i].address + "</td>");
-                $('table').append(tr);
-            }
-        }
+    function Customers_Read() {
+        $.ajax({
+            url: 'https://localhost:44395/api/Customer',
+            method: 'GET',
+        }).done(function (result) {
+            Customers_LoadTable(result);
+        }); 
+    }
+
+    function Customers_LoadTable(result) {
+       var rows = [];
+        $.each(result, function (index, obj) {
+            rows.push('<tr><td>' + obj.customerID + '</td><td>' + obj.firstName + " " + obj.lastName + '</td><td>' + obj.address+'</td></tr>');
+        });
+       $('table').append(rows.join(''));
+    }
 </script>
 }
