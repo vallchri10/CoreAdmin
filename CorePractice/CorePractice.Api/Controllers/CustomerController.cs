@@ -73,5 +73,26 @@ namespace CorePractice.Api.Controllers
             }
             return NoContent();
         }
+
+        [HttpDelete("{CustomerID}")]
+        public async Task<ActionResult<Customer>> Customer_Delete(string CustomerID)
+        {
+            try
+            {
+                var Result = await _customerService.Customer_Delete(CustomerID);
+                return Result;
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 51000)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }          
+        }
     }
 }

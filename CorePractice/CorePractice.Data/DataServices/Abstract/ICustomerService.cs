@@ -11,5 +11,6 @@ namespace CorePractice.Data.DataServices.Abstract
         Task<Customer> Customer_Read(string CustomerID);
         Task Customer_Create(Customer CustomerDomain);
         Task Customer_Update(Customer CustomerDomain);
+        Task<Customer> Customer_Delete(string CustomerID); 
     }
 }

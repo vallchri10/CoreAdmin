@@ -6,5 +6,6 @@
         public const string Customer_Read = "EXEC @ReturnCode = [dbo].[Customer_Read] @CustomerID";
         public const string Customer_Create = "EXEC [dbo].[Customer_Create] @CustomerID, @FirstName, @LastName, @DateOfBirth, @Address";
         public const string Customer_Update = "EXEC @ReturnCode = [dbo].[Customer_Update] @CustomerID, @FirstName, @LastName, @DateOfBirth, @Address";
+        public const string Customer_Delete = "EXEC @ReturnCode = [dbo].[Customer_Delete] @CustomerID";
     }
 }
