@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CorePractice.Data\CorePractice.Data.csproj" />
-    <ProjectReference Include="..\WebsitePractice\CorePractice.Website.csproj" />
   </ItemGroup>
 
 </Project>
