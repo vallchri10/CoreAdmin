@@ -12,5 +12,16 @@ namespace CorePractice.Website.Controllers
         {
             return View();
         }
+
+        
+        public IActionResult CustomerUpdate(int CustomerID)
+        {
+            return PartialView("_Customer_Update", CustomerID);
+        }
+
+
+
+
+
     }
 }

@@ -15,43 +15,46 @@
                                 Name
                             </th>
                             @*<th>
-                                Last Name
-                            </th>*@
-                            <th >
+                                    Last Name
+                                </th>*@
+                            <th>
                                 Address
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
             </div>
         </div>
     </div>
 </div>
-@section scripts
-{
-<script>
-    $(function () {
-        $.ajax({
-            url: 'https://localhost:44395/api/Customer',
-            method: 'GET',
-        }).done(function (result) {
-            processResult(result);
-        });
-    });
 
-    function processResult(result) {
-        var tr;
-        for (var i = 0; i < result.length; i++) {
-            tr = $('<tr/>');
-            tr.append("<td>" + result[i].customerID + "</td>");
-            tr.append("<td>" + result[i].firstName +" "+ result[i].lastName + "</td>");
-            //tr.append("<td>" + result[i].lastName + "</td>");
-            tr.append("<td>" + result[i].address+ "</td>");
-            $('table').append(tr);
+
+@*<partial name="../Customer/_Customer_Update" />*@
+@section scripts
+    {
+<script>
+        $(function () {
+            $.ajax({
+                url: 'https://localhost:44395/api/Customer',
+                method: 'GET',
+            }).done(function (result) {
+                processResult(result);
+            });
+        });
+
+        function processResult(result) {
+            var tr;
+            for (var i = 0; i < result.length; i++) {
+                tr = $('<tr/>');
+                //tr.append("<td>" + result[i].customerID + "</td>");
+                tr.append("<td><a href="+"/Customer/CustomerUpdate/"+result[i].customerID+">"+result[i].customerID+"</a></td>");
+                tr.append("<td>" + result[i].firstName + " " + result[i].lastName + "</td>");
+                //tr.append("<td>" + result[i].lastName + "</td>");
+                tr.append("<td>" + result[i].address + "</td>");
+                $('table').append(tr);
+            }
         }
-    }
 </script>
 }
