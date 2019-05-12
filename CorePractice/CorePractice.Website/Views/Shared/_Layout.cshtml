@@ -4,23 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebsitePractice</title>
-    <partial name="_StylesPartial" />
+    <partial name="wwwrootPartials/_StylesPartial" />
 </head>
 <body>
     <div class="wrapper ">
-        <partial name="_SidebarPartial" />
+        <partial name="LayoutPartials/_SidebarPartial" />
         <div class="main-panel">
-            <partial name="_NavbarPartial" />
+            <partial name="LayoutPartials/_NavbarPartial" />
             <div class="content">
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
             </div>
-            <partial name="_FooterPartial" />
+            <partial name="LayoutPartials/_FooterPartial" />
         </div>
     </div>
     <div id="applicationModals" class="modal" tabindex="-1" role="dialog"></div>
+    <partial name="wwwrootPartials/_ScriptsPartial" />
     @RenderSection("Scripts", required: false)
-    <partial name="_ScriptsPartial" />
 </body>
 </html>

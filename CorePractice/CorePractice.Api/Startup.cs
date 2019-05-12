@@ -61,7 +61,7 @@ namespace CorePractice.Api
 
 
             app.UseCors(
-      options => options.WithOrigins("http://localhost:64020").AllowAnyMethod()
+      options => options.WithOrigins("https://localhost:44375").AllowAnyMethod()
   );
 
 
