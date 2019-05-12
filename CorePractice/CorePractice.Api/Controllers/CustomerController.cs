@@ -45,7 +45,7 @@ namespace CorePractice.Api.Controllers
             {
                 return Conflict(new { message = $"An existing record with the id '{CustomerDomain.CustomerID}' was already found." });
             }
-            return CreatedAtAction("Customer_Read", new { CustomerID = CustomerDomain.CustomerID }, CustomerDomain);
+            return CreatedAtAction("Customer_Read", new { CustomerDomain.CustomerID }, CustomerDomain);
         }
 
         [HttpPut("{CustomerID}")]
