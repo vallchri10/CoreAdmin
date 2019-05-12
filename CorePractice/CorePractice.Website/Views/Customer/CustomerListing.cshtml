@@ -8,26 +8,21 @@
                 <table class="table tablesorter " id="">
                     <thead class=" text-primary">
                         <tr>
-                            <th>
-                                Customer ID
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                            @*<th>
-                                    Last Name
-                                </th>*@
-                            <th>
-                                Address
-                            </th>
+                            <th>Customer ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody data-position="0" data-jump="2"></tbody>
                 </table>
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
             </div>
         </div>
     </div>
+
+    <button class="less">Back <span class="count">0</span></button>
+    <button class="more">Forwards <span class="count">0</span></button>
+
 </div>
 
 
@@ -37,6 +32,10 @@
 <script>
     $(function () {
         Customers_Read(); 
+
+        
+
+
     });
 
     function Customers_Read() {
@@ -53,7 +52,71 @@
         $.each(result, function (index, obj) {
             rows.push('<tr><td>' + obj.customerID + '</td><td>' + obj.firstName + " " + obj.lastName + '</td><td>' + obj.address+'</td></tr>');
         });
-       $('table').append(rows.join(''));
+        $('table').append(rows.join(''));
+
+
+
+
+
+
+
+        var total = $('tbody > tr').length;
+        var position = $('tbody').data('position');
+        var jump = $('tbody').data('jump');
+        var paginate = function (position, jump) {
+            /* Show Default Items */
+            $('tbody > tr').each(function () {
+                /* Variable Defaults */
+                var index = $(this).index();
+
+                /* Condition */
+                var condition = (index >= position) && (index < position + jump);
+
+                /* Hide/Show Item */
+                $(this).toggle(condition);
+
+                /* Set Disabled Status */
+                $('.less').prop('disabled', (position - jump) < 0);
+                $('.more').prop('disabled', (position + jump) >= total);
+            });
+        };
+
+        /* Set Default Text */
+        $('.count').text(jump);
+
+        /* Init Paginate */
+        paginate(position, jump);
+
+        /* Bind Click Events to "Less" and "More" Button */
+        $('.less, .more').on('click', function () {
+            /* Decrease/Increase Position */
+            position = $(this).hasClass('less') ? $('tbody').data('position') - jump : $('tbody').data('position') + jump;
+
+            /* Paginate */
+            paginate(position, jump);
+
+            /* Update Position */
+            $('tbody').data('position', position);
+        });
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+ 
+
+
+
 </script>
 }
