@@ -1,41 +1,73 @@
-﻿<div class="col-md-12">
+﻿<style>
+    .row-ID {
+        width: 10%;
+    }
+
+    .row-name {
+        width: 40%;
+    }
+
+    .row-address {
+        width: 30%;
+    }
+
+    .row-email {
+        width: 20%;
+    }
+
+    .users {
+        table-layout: fixed;
+        width: 100%;
+        white-space: nowrap;
+      
+    }
+
+        .users td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+    
+        .card-body{
+            height: 303px; 
+        }
+
+
+
+</style>
+
+<div class="col-md-12">
     <div class="card ">
         <div class="card-header">
             <h4 class="card-title"> Simple Table</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive ps">
-                <table class="table tablesorter " id="">
+                <table class="table tablesorter users" id="data">
                     <thead class=" text-primary">
                         <tr>
-                            <th>Customer ID</th>
-                            <th>Name</th>
-                            <th>Address</th>
+                            <th class="row-ID">Customer ID</th>
+                            <th class="row-name">Name</th>
+                            <th class="row-address">Address</th>
                         </tr>
                     </thead>
-                    <tbody data-position="0" data-jump="2"></tbody>
+                    <tbody></tbody>
                 </table>
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
             </div>
         </div>
     </div>
-
-    <button class="less">Back <span class="count">0</span></button>
-    <button class="more">Forwards <span class="count">0</span></button>
+    <button id="back">Back</button>
+    <button id="next">Next</button>
 
 </div>
-
-
-@*<partial name="../Customer/_Customer_Update" />*@
 @section scripts
     {
 <script>
     $(function () {
         Customers_Read(); 
-
-        
-
-
     });
 
     function Customers_Read() {
@@ -54,69 +86,43 @@
         });
         $('table').append(rows.join(''));
 
-
-
-
-
-
-
-        var total = $('tbody > tr').length;
-        var position = $('tbody').data('position');
-        var jump = $('tbody').data('jump');
-        var paginate = function (position, jump) {
-            /* Show Default Items */
-            $('tbody > tr').each(function () {
-                /* Variable Defaults */
-                var index = $(this).index();
-
-                /* Condition */
-                var condition = (index >= position) && (index < position + jump);
-
-                /* Hide/Show Item */
-                $(this).toggle(condition);
-
-                /* Set Disabled Status */
-                $('.less').prop('disabled', (position - jump) < 0);
-                $('.more').prop('disabled', (position + jump) >= total);
-            });
-        };
-
-        /* Set Default Text */
-        $('.count').text(jump);
-
-        /* Init Paginate */
-        paginate(position, jump);
-
-        /* Bind Click Events to "Less" and "More" Button */
-        $('.less, .more').on('click', function () {
-            /* Decrease/Increase Position */
-            position = $(this).hasClass('less') ? $('tbody').data('position') - jump : $('tbody').data('position') + jump;
-
-            /* Paginate */
-            paginate(position, jump);
-
-            /* Update Position */
-            $('tbody').data('position', position);
-        });
-
-
-
-
-
-
-
-
-
-
+        Customers_TablePagination()
     }
 
+    function Customers_TablePagination(){
+        $('.card-body').after('<div style="text-align:center;" id="nav"></div>');
+
+        //Math for actual paging
+        var rowsShown = 4;
+        var rowsTotal = $('#data tbody tr').length;
+        var numPages = rowsTotal / rowsShown;
+
+        //Add elements to our nav
+        for (i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
+        }
 
 
 
+        $('#data tbody tr').hide();
+        $('#data tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
 
- 
+        $('#nav a').bind('click', function () {
 
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+    }
 
+   
 
+    
 </script>
 }
