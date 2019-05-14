@@ -1,26 +1,29 @@
-﻿<style>
-    .row-ID {
-        width: 10%;
-    }
+﻿@{
+    ViewData["Title"] = "Customer Listing";
+}
 
-    .row-name {
-        width: 40%;
-    }
+<style>
+        .row-ID {
+            width: 10%;
+        }
 
-    .row-address {
-        width: 30%;
-    }
+        .row-name {
+            width: 40%;
+        }
 
-    .row-email {
-        width: 20%;
-    }
+        .row-address {
+            width: 30%;
+        }
 
-    .users {
-        table-layout: fixed;
-        width: 100%;
-        white-space: nowrap;
-      
-    }
+        .row-email {
+            width: 20%;
+        }
+
+        .users {
+            table-layout: fixed;
+            width: 100%;
+            white-space: nowrap;
+        }
 
         .users td {
             white-space: nowrap;
@@ -28,144 +31,159 @@
             text-overflow: ellipsis;
         }
 
-
-    
         .card-body{
-            height: 303px; 
+            height: 558px;
         }
+    </style>
 
-
-
-</style>
-
-<div class="col-md-12">
-    <div class="card ">
-        <div class="card-header">
-            <h4 class="card-title"> Simple Table</h4>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive ps">
-                <table class="table tablesorter users" id="data">
-                    <thead class=" text-primary">
-                        <tr>
-                            <th class="row-ID">Customer ID</th>
-                            <th class="row-name">Name</th>
-                            <th class="row-address">Address</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title"> Simple Table</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive ps">
+                    <table class="table tablesorter users" id="data">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th class="row-ID">Customer ID</th>
+                                <th class="row-name">Name</th>
+                                <th class="row-address">Address</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+                </div>
             </div>
         </div>
-    </div>
-
-
-    <nav aria-label=...>
-        <ul class=pagination>
-            <li id="previous-page"><a href="javascript:void(0)" aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>
+        <ul class="pagination justify-content-center">
+            <li id="previous-page" class="page-item">
+                <a href="javascript:void(0)" class="page-link">
+                    <span>&laquo;</span>
+                </a>
+            </li>
         </ul>
-    </nav>
-
-</div>
-@section scripts
+    </div>
+    @section scripts
     {
-<script>
-    $(function () {
-        Customers_Read(); 
-    });
-
-    function Customers_Read() {
-        $.ajax({
-            url: 'https://localhost:44395/api/Customer',
-            method: 'GET',
-        }).done(function (result) {
-            Customers_LoadTable(result);
-        }); 
-    }
-
-    function Customers_LoadTable(result) {
-       var rows = [];
-        $.each(result, function (index, obj) {
-            rows.push('<tr><td>' + obj.customerID + '</td><td>' + obj.firstName + " " + obj.lastName + '</td><td>' + obj.address+'</td></tr>');
+    <script>
+        $(function () {
+            Customers_Read();
         });
-        $('table').append(rows.join(''));
 
-        Customers_TablePagination()
-    }
-
-    function Customers_TablePagination() {
-        var numberOfItems = $('#data tbody tr').length;
-        var limitPerPage = 4; 
-
-        $('#data tbody tr').hide();
-        $('#data tbody tr').slice(0, limitPerPage).show();
-
-        var totalPages = Math.ceil(numberOfItems / limitPerPage); 
-
-        $(".pagination").append("<li class='current-page active'><a href='javascript:void(0)'>" + 1 + "</a></li>");
-        
-        for (var i = 2; i <= totalPages; i++) {
-            $(".pagination").append("<li class='current-page'><a href='javascript:void(0)'>" + i + "</a></li>");
+        function Customers_Read() {
+            $.ajax({
+                url: 'https://localhost:44395/api/Customer',
+                method: 'GET',
+            }).done(function (result) {
+                Customers_LoadTable(result);
+            });
         }
 
-        $(".pagination").append("<li id='next-page'><a href='javascript:void(0)' aria-label=Next><span aria-hidden=true>&raquo;</span></a></li>");
-        
-        $(".pagination li.current-page").on("click", function () {
-        
-            if ($(this).hasClass('active')) {
-                return false; 
-            } else {
-                var currentPage = $(this).index(); 
-                $(".pagination li").removeClass('active'); 
-                $(this).addClass('active'); 
-                $("#data tbody tr").hide(); 
-                var grandTotal = limitPerPage * currentPage; 
+        function Customers_LoadTable(result) {
+           var rows = [];
+            $.each(result, function (index, obj) {
+                rows.push('<tr><td>' + obj.customerID + '</td><td>' + obj.firstName + " " + obj.lastName + '</td><td>' + obj.address + '</td><td><button onclick="Customer_UpdateCustomer(this)"></button></td></tr>');
+            });
+            $('table').append(rows.join(''));
 
-                for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
-                    $("#data tbody tr:eq(" + i + ")").show(); 
-                }
+            Customers_TablePagination()
+        }
+
+        function Customers_TablePagination() {
+            var numberOfItems = $('#data tbody tr').length;
+            var limitPerPage = 10;
+
+            $('#data tbody tr').hide();
+            $('#data tbody tr').slice(0, limitPerPage).show();
+
+            var totalPages = Math.ceil(numberOfItems / limitPerPage);
+
+            $(".pagination").append("<li class='current-page active page-item'><a href='javascript:void(0)' class='page-link'>" + 1 + "</a></li>");
+
+            for (var i = 2; i <= totalPages; i++) {
+                $(".pagination").append("<li class='current-page page-item'><a href='javascript:void(0)' class='page-link'>" + i + "</a></li>");
             }
-        });
 
-        $("#next-page").on("click", function () {
-            var currentPage = $(".pagination li.active").index(); 
+            $(".pagination").append("<li id='next-page' class='page-item'><a href='javascript:void(0)' class='page-link'><span>&raquo;</span></a></li>");
+
+            $(".pagination li.current-page").on("click", function () {
+
+                if ($(this).hasClass('active')) {
+                    return false;
+                } else {
+                    var currentPage = $(this).index();
+                    $(".pagination li").removeClass('active');
+                    $(this).addClass('active');
+                    $("#data tbody tr").hide();
+                    var grandTotal = limitPerPage * currentPage;
+
+                    for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
+                        $("#data tbody tr:eq(" + i + ")").show();
+                    }
+                }
+            });
+
+            $("#next-page").on("click", function () {
+                var currentPage = $(".pagination li.active").index();
+
+                if (currentPage === totalPages) {
+                    return false;
+                } else {
+                    currentPage++;
+                    $(".pagination li").removeClass('active');
+                    $("#data tbody tr").hide();
+                    var grandTotal = limitPerPage * currentPage;
+
+
+                    for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
+                        $("#data tbody tr:eq(" + i + ")").show();
+                    }
+
+                    $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass('active');
+                }
+            });
+
+            $("#previous-page").on("click", function () {
+                var currentPage = $(".pagination li.active").index();
+
+                if (currentPage === 1) {
+                    return false;
+                } else {
+                    currentPage--;
+                    $(".pagination li").removeClass('active');
+                    $("#data tbody tr").hide();
+                    var grandTotal = limitPerPage * currentPage;
+
+                    for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
+                        $("#data tbody tr:eq(" + i + ")").show();
+                    }
+
+                    $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass('active');
+                }
+            });
+        }
+
+        function Customer_UpdateCustomer(row)
+        {
+            //var $row = $(row).closest("tr"),
+            //    $tds = $row.find("td")
+
+            //alert($tds[0].innerText); 
+            //alert($tds[1].innerText);
+            //alert($tds[2].innerText); 
             
-            if (currentPage === totalPages) {
-                return false; 
-            } else {
-                currentPage++; 
-                $(".pagination li").removeClass('active'); 
-                $("#data tbody tr").hide(); 
-                var grandTotal = limitPerPage * currentPage; 
-
-                
-                for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
-                    $("#data tbody tr:eq(" + i + ")").show(); 
-                }
-
-                $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass('active'); 
-            }
-        });
-
-        $("#previous-page").on("click", function () {
-            var currentPage = $(".pagination li.active").index(); 
-            
-            if (currentPage === 1) {
-                return false; 
-            } else {
-                currentPage--; 
-                $(".pagination li").removeClass('active'); 
-                $("#data tbody tr").hide(); 
-                var grandTotal = limitPerPage * currentPage; 
-                
-                for (var i = grandTotal - limitPerPage; i < grandTotal; i++) {
-                    $("#data tbody tr:eq(" + i + ")").show(); 
-                }
-
-                $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass('active');
-            }
-        });
+            $.ajax({
+                url: '@Url.Action("CustomerUpdate", "Customer")',
+                method: 'GET',
+            }).done(function (result) {
+                $('.modal').html(result);
+                $('.modal').modal('show');
+            });
+        }
+    </script>
     }
-</script>
-}
+
+
+
