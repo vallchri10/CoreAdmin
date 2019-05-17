@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[Customers_Read]
+﻿CREATE PROCEDURE [dbo].[Customers_Read]
 
 AS
 

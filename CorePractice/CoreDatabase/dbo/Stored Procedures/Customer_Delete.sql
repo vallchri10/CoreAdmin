@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[Customer_Delete]
+﻿CREATE PROCEDURE [dbo].[Customer_Delete]
 	@CustomerID VARCHAR(10)
 AS
 

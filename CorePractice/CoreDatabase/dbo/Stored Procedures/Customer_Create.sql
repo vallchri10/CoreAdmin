@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[Customer_Create]
+﻿CREATE PROCEDURE [dbo].[Customer_Create]
 	@CustomerID NVARCHAR(10),
 	@FirstName NVARCHAR(50),
 	@LastName NVARCHAR(50),

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[Customer_Read]
+﻿CREATE PROCEDURE [dbo].[Customer_Read]
 	@CustomerID NVARCHAR(10)
 
 AS
