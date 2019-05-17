@@ -23,74 +23,74 @@ namespace CorePractice.Data.DataServices.Concrete
         public async Task<IEnumerable<Customer>> Customers_Read()
         {
             var Result = await _context.Set<CustomerEntity>().FromSql(
-                SPCommands.Customers_Read).ToListAsync();
+                SQLCommands.Customers_Read).ToListAsync();
 
             return _mapper.Map<List<Customer>>(Result);
         }
 
         public async Task<Customer> Customer_Read(string CustomerID)
         {
-            SPParameters.CustomerID.Value = CustomerID;
+            SQLParameters.CustomerID.Value = CustomerID;
 
             var Result = await _context.Set<CustomerEntity>().FromSql(
-                SPCommands.Customer_Read,
-                SPParameters.CustomerID,
-                SPParameters.ReturnCode)
+                SQLCommands.Customer_Read,
+                SQLParameters.CustomerID,
+                SQLParameters.ReturnCode)
                 .FirstOrDefaultAsync();
 
-            var ReturnCode = SPParameters.ReturnCode.Value.ToString();
+            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
 
             return _mapper.Map<Customer>(Result);
         }
 
         public async Task Customer_Create(Customer CustomerDomain)
         {
-            SPParameters.CustomerID.Value = CustomerDomain.CustomerID;
-            SPParameters.FirstName.Value = CustomerDomain.FirstName;
-            SPParameters.LastName.Value = CustomerDomain.LastName;
-            SPParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth;
-            SPParameters.Address.Value = CustomerDomain.Address;
+            SQLParameters.CustomerID.Value = CustomerDomain.CustomerID;
+            SQLParameters.FirstName.Value = CustomerDomain.FirstName;
+            SQLParameters.LastName.Value = CustomerDomain.LastName;
+            SQLParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth;
+            SQLParameters.Address.Value = CustomerDomain.Address;
 
             await _context.Database.ExecuteSqlCommandAsync(
-                SPCommands.Customer_Create, 
-                SPParameters.CustomerID, 
-                SPParameters.FirstName, 
-                SPParameters.LastName, 
-                SPParameters.DateOfBirth,
-                SPParameters.Address);
+                SQLCommands.Customer_Create, 
+                SQLParameters.CustomerID, 
+                SQLParameters.FirstName, 
+                SQLParameters.LastName, 
+                SQLParameters.DateOfBirth,
+                SQLParameters.Address);
         }
 
         public async Task Customer_Update(Customer CustomerDomain)
         {
-            SPParameters.CustomerID.Value = CustomerDomain.CustomerID;
-            SPParameters.FirstName.Value = CustomerDomain.FirstName;
-            SPParameters.LastName.Value = CustomerDomain.LastName;
-            SPParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth; 
-            SPParameters.Address.Value = CustomerDomain.Address; 
+            SQLParameters.CustomerID.Value = CustomerDomain.CustomerID;
+            SQLParameters.FirstName.Value = CustomerDomain.FirstName;
+            SQLParameters.LastName.Value = CustomerDomain.LastName;
+            SQLParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth; 
+            SQLParameters.Address.Value = CustomerDomain.Address; 
 
             await _context.Database.ExecuteSqlCommandAsync(
-                SPCommands.Customer_Update, 
-                SPParameters.CustomerID, 
-                SPParameters.FirstName, 
-                SPParameters.LastName, 
-                SPParameters.DateOfBirth,
-                SPParameters.Address, 
-                SPParameters.ReturnCode);
+                SQLCommands.Customer_Update, 
+                SQLParameters.CustomerID, 
+                SQLParameters.FirstName, 
+                SQLParameters.LastName, 
+                SQLParameters.DateOfBirth,
+                SQLParameters.Address, 
+                SQLParameters.ReturnCode);
 
-            var ReturnCode = SPParameters.ReturnCode.Value.ToString();
+            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
         }
 
         public async Task<Customer> Customer_Delete (string CustomerID)
         {
-            SPParameters.CustomerID.Value = CustomerID;
+            SQLParameters.CustomerID.Value = CustomerID;
 
             var Result = await _context.Set<CustomerEntity>().FromSql(
-                SPCommands.Customer_Delete,
-                SPParameters.CustomerID,
-                SPParameters.ReturnCode)
+                SQLCommands.Customer_Delete,
+                SQLParameters.CustomerID,
+                SQLParameters.ReturnCode)
                 .FirstOrDefaultAsync();
 
-            var ReturnCode = SPParameters.ReturnCode.Value.ToString();
+            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
 
             return _mapper.Map<Customer>(Result);
         }

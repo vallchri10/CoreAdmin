@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace CorePractice.Data
 {
-    public static class SPParameters
+    public static class SQLParameters
     {
         public static SqlParameter CustomerID = new SqlParameter("@CustomerID", SqlDbType.NVarChar);
         public static SqlParameter FirstName = new SqlParameter("@FirstName", SqlDbType.NVarChar);

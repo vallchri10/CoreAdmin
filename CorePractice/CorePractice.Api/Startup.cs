@@ -29,20 +29,18 @@ namespace CorePractice.Api
             {
                 cfg.CreateMap<CustomerEntity, Customer>();
             });
+
             services.AddSingleton(config.CreateMapper());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<CoreContext>(
                 options => options.UseSqlServer(
-                     Configuration.GetConnectionString("RigConnection")));
+                    Configuration.GetConnectionString("RigConnection")));
 
             services.AddScoped<ICustomerService, CustomerService>();
 
-
             services.AddCors();
-
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -58,12 +56,7 @@ namespace CorePractice.Api
 
             app.UseHttpsRedirection();
 
-
-
-            app.UseCors(
-      options => options.WithOrigins("https://localhost:44375").AllowAnyMethod()
-  );
-
+            app.UseCors(options => options.WithOrigins("https://localhost:44375").AllowAnyMethod());
 
             app.UseMvc();
         }
