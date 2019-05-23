@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
-using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
 
 using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Domain.Models;
-using System.Data.SqlClient;
+using CorePractice.Domain.ExceptionModels;
 
 namespace CorePractice.Api.Controllers
 {
@@ -31,7 +30,14 @@ namespace CorePractice.Api.Controllers
         [HttpGet("{CustomerID}")]
         public async Task<Customer> Customer_Read(string CustomerID)
         {
-            return await _customerService.Customer_Read(CustomerID); 
+            try
+            {
+                return await _customerService.Customer_Read(CustomerID);
+            }
+            catch(SqlException ex)
+            {
+                throw new NotFoundCustomException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
+            }
         }
 
         [HttpPost]

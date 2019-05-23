@@ -34,11 +34,8 @@ namespace CorePractice.Data.DataServices.Concrete
 
             var Result = await _context.Set<CustomerEntity>().FromSql(
                 SQLCommands.Customer_Read,
-                SQLParameters.CustomerID,
-                SQLParameters.ReturnCode)
+                SQLParameters.CustomerID)
                 .FirstOrDefaultAsync();
-
-            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
 
             return _mapper.Map<Customer>(Result);
         }

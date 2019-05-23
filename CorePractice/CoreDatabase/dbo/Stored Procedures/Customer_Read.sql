@@ -5,12 +5,16 @@ AS
 
 SET NOCOUNT ON
 BEGIN
+IF  EXISTS
+(
+	SELECT Customers.CustomerID
+	FROM [dbo].Customers
+	WHERE CustomerID = @CustomerID
+)
 	SELECT *
 	FROM [dbo].Customers
 	WHERE CustomerID = @CustomerID
-END
-
-IF(@@ROWCOUNT > 0)
-	RETURN 1
 ELSE
-	RETURN 0
+	THROW 51000, 'Record not found.', 1;  
+	RETURN
+END

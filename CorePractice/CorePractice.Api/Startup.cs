@@ -57,6 +57,7 @@ namespace CorePractice.Api
             app.UseHttpsRedirection();
 
             app.UseCors(options => options.WithOrigins("https://localhost:44375").AllowAnyMethod());
+            app.UseMiddleware<CustomExceptionMiddleware>();
 
             app.UseMvc();
         }
