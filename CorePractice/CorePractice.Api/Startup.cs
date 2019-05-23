@@ -9,6 +9,7 @@ using CorePractice.Data.DataSources;
 using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Data.DataServices.Concrete;
 using AutoMapper;
+using CorePractice.Api.Middleware;
 using CorePractice.Domain.Models;
 
 namespace CorePractice.Api
@@ -57,7 +58,7 @@ namespace CorePractice.Api
             app.UseHttpsRedirection();
 
             app.UseCors(options => options.WithOrigins("https://localhost:44375").AllowAnyMethod());
-            app.UseMiddleware<CustomExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseMvc();
         }

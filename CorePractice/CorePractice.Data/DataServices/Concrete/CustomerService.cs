@@ -73,8 +73,6 @@ namespace CorePractice.Data.DataServices.Concrete
                 SQLParameters.DateOfBirth,
                 SQLParameters.Address, 
                 SQLParameters.ReturnCode);
-
-            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
         }
 
         public async Task<Customer> Customer_Delete (string CustomerID)

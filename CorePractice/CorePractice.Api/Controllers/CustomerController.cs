@@ -36,7 +36,7 @@ namespace CorePractice.Api.Controllers
             }
             catch(SqlException ex)
             {
-                throw new NotFoundCustomException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
+                throw new NotFoundException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
             }
         }
 
@@ -47,9 +47,9 @@ namespace CorePractice.Api.Controllers
             {
                 await _customerService.Customer_Create(CustomerDomain);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                return Conflict(new { message = $"An existing record with the id '{CustomerDomain.CustomerID}' was already found." });
+                throw new ConflictException(ex.Message, $"Customer {CustomerDomain.CustomerID} already exists.");
             }
             return CreatedAtAction("Customer_Read", new { CustomerDomain.CustomerID }, CustomerDomain);
         }
@@ -68,14 +68,7 @@ namespace CorePractice.Api.Controllers
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 51000)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw new NotFoundException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
             }
             return NoContent();
         }

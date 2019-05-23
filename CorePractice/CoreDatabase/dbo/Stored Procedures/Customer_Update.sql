@@ -10,7 +10,7 @@ SET NOCOUNT ON
 BEGIN
 IF  EXISTS
 (
-	SELECT *
+	SELECT Customers.CustomerID
 	FROM [dbo].Customers
 	WHERE CustomerID = @CustomerID
 )
@@ -21,10 +21,6 @@ IF  EXISTS
 		DateOfBirth  = @DateOfBirth,
 		Address  = @Address
 	WHERE CustomerID = @CustomerID
-
-	IF(@@ROWCOUNT > 0)
-	RETURN 1
-
 ELSE
-	THROW 51000, 'The record does not exist.', 1;  
+	THROW 51000, 'Record not found.', 1;  
 END
