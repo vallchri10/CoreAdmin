@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CorePractice.Data
+namespace CorePractice.Data.Utilities
 {
     public static class PasswordHelper
     {
@@ -17,8 +15,6 @@ namespace CorePractice.Data
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-
-
 
         public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
@@ -35,9 +31,7 @@ namespace CorePractice.Data
                     if (computedHash[i] != storedHash[i]) return false;
                 }
             }
-
             return true;
         }
-
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 
 using CorePractice.Data.DataServices.Abstract;
-using CorePractice.Domain.Models;
+using CorePractice.Domain.DataModels;
 using CorePractice.Domain.ExceptionModels;
 
 namespace CorePractice.Api.Controllers

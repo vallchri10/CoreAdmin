@@ -5,7 +5,9 @@ using AutoMapper;
 
 using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Data.DataSources;
-using CorePractice.Domain.Models;
+using CorePractice.Domain.DataModels;
+using CorePractice.Data.Entities;
+using CorePractice.Data.Utilities;
 
 namespace CorePractice.Data.DataServices.Concrete
 {

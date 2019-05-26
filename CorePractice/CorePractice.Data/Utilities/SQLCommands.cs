@@ -1,4 +1,4 @@
-﻿namespace CorePractice.Data
+﻿namespace CorePractice.Data.Utilities
 {
     public static class SQLCommands
     {
@@ -10,5 +10,6 @@
 
 
         public const string User_Create = "EXEC [dbo].[User_Create] @UserID, @UserRole, @FirstName, @LastName, @Username, @PasswordHash, @PasswordSalt";
+        public const string Users_Read = "EXEC [dbo].[Users_Read]";
     }
 }

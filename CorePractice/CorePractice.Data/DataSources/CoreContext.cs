@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CorePractice.Data.Entities;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CorePractice.Data.DataSources
 {
@@ -44,7 +44,7 @@ namespace CorePractice.Data.DataSources
                  .HasMaxLength(10)
                  .ValueGeneratedNever();
 
-                entity.Property(e => e.UserRole).HasMaxLength(10).IsRequired();
+                entity.Property(e => e.UserRole).HasMaxLength(10);
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 

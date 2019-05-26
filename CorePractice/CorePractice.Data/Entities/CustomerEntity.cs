@@ -1,10 +1,9 @@
 ﻿using System;
-
-namespace CorePractice.Domain.Models
+namespace CorePractice.Data.Entities
 {
-    public class Customer
+    public partial class CustomerEntity
     {
-        public string CustomerID { get; set; }
+        public string CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }

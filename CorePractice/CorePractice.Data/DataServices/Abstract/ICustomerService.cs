@@ -1,7 +1,7 @@
 ﻿using CorePractice.Data.DataSources;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CorePractice.Domain.Models; 
+using CorePractice.Domain.DataModels;
 
 namespace CorePractice.Data.DataServices.Abstract
 {

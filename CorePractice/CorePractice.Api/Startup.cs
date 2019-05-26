@@ -10,7 +10,7 @@ using CorePractice.Data.DataServices.Abstract;
 using CorePractice.Data.DataServices.Concrete;
 using AutoMapper;
 using CorePractice.Api.Middleware;
-using CorePractice.Domain.Models;
+using CorePractice.Domain.DataModels;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Threading.Tasks;
@@ -35,7 +35,6 @@ namespace CorePractice.Api
             services.AddDbContext<CoreContext>(
                 options => options.UseSqlServer(
                     Configuration.GetConnectionString("RigConnection")));
-            services.AddScoped<ICustomerService, CustomerService>();
             services.AddCors();
             
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -77,10 +76,9 @@ namespace CorePractice.Api
                 };
             });
 
-
-
-
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

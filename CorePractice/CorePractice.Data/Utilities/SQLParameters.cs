@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace CorePractice.Data
+namespace CorePractice.Data.Utilities
 {
     public static class SQLParameters
     {

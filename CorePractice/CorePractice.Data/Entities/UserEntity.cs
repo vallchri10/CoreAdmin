@@ -1,4 +1,4 @@
-﻿namespace CorePractice.Data.DataSources
+﻿namespace CorePractice.Data.Entities
 {
     public class UserEntity
     {

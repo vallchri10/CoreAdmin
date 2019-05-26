@@ -1,4 +1,4 @@
-﻿namespace CorePractice.Domain.Models
+﻿namespace CorePractice.Domain.DataModels
 {
     public static class Role
     {
