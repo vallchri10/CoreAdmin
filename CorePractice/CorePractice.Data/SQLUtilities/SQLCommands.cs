@@ -7,5 +7,8 @@
         public const string Customer_Create = "EXEC [dbo].[Customer_Create] @CustomerID, @FirstName, @LastName, @DateOfBirth, @Address";
         public const string Customer_Update = "EXEC [dbo].[Customer_Update] @CustomerID, @FirstName, @LastName, @DateOfBirth, @Address";
         public const string Customer_Delete = "EXEC @ReturnCode = [dbo].[Customer_Delete] @CustomerID";
+
+
+        public const string User_Create = "EXEC [dbo].[User_Create] @UserID, @UserRole, @FirstName, @LastName, @Username, @PasswordHash, @PasswordSalt";
     }
 }
