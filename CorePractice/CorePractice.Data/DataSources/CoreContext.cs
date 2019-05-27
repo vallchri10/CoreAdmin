@@ -33,6 +33,17 @@ namespace CorePractice.Data.DataSources
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 
                 entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.State).HasMaxLength(50);
+
+                entity.Property(e => e.ZipCode).HasMaxLength(50);
+
+                entity.Property(e => e.City).HasMaxLength(50);
+
+                entity.Property(e => e.DateOfBirth);
+
+
+
             });
 
             modelBuilder.Entity<UserEntity>(entity =>
