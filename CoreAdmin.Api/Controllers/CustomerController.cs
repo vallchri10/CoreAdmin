@@ -69,6 +69,8 @@ namespace CoreAdmin.Api.Controllers
             try
             {
                 await _customerService.Customer_Update(CustomerDomain);
+
+                return NoContent();
             }
             catch (SqlException ex)
             {
@@ -79,31 +81,25 @@ namespace CoreAdmin.Api.Controllers
 
                 throw;
             }
-            return NoContent();
         }
 
-
-
-
-
         [HttpDelete("{CustomerID}")]
-        public async Task<ActionResult<Customer>> Customer_Delete(string CustomerID)
+        public async Task<ActionResult> CustomerDelete(string CustomerID)
         {
             try
             {
-                var Result = await _customerService.Customer_Delete(CustomerID);
-                return Result;
+                await _customerService.Customer_Delete(CustomerID);
+
+                return NoContent(); 
             }
             catch (SqlException ex)
             {
                 if (ex.Number == 51000)
                 {
-                    return NotFound();
+                    throw new NotFoundException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
         }
     }

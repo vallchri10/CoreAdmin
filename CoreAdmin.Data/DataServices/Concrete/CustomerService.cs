@@ -84,19 +84,11 @@ namespace CoreAdmin.Data.DataServices.Concrete
                 SQLParameters.ZipCode);
         }
 
-        public async Task<Customer> Customer_Delete (string CustomerID)
+        public async Task Customer_Delete (string CustomerID)
         {
             SQLParameters.CustomerID.Value = CustomerID;
 
-            var Result = await _context.Set<CustomerEntity>().FromSql(
-                SQLCommands.Customer_Delete,
-                SQLParameters.CustomerID,
-                SQLParameters.ReturnCode)
-                .FirstOrDefaultAsync();
-
-            var ReturnCode = SQLParameters.ReturnCode.Value.ToString();
-
-            return _mapper.Map<Customer>(Result);
+            await _context.Database.ExecuteSqlCommandAsync(SQLCommands.Customer_Delete, SQLParameters.CustomerID); 
         }
     }
 }
