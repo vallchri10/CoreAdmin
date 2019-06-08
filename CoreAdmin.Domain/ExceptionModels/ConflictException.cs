@@ -2,10 +2,8 @@
 
 namespace CoreAdmin.Domain.ExceptionModels
 {
-    public class ConflictException : BaseCustomException
+    public class ConflictException : BaseException
     {
-        public ConflictException(string message, string description) : base(message, description, (int)HttpStatusCode.Conflict)
-        {
-        }
+        public ConflictException(string message, string description) : base(message, description, (int)HttpStatusCode.Conflict){}
     }
 }

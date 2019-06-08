@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreAdmin.Domain.ExceptionModels
 {
-    public class BaseCustomException : Exception
+    public abstract class BaseException : Exception
     {
         private int _code;
         private string _description;
@@ -19,7 +16,7 @@ namespace CoreAdmin.Domain.ExceptionModels
             get => _description;
         }
 
-        public BaseCustomException(string message, string description, int code) : base(message)
+        public BaseException(string message, string description, int code) : base(message)
         {
             _code = code;
             _description = description;

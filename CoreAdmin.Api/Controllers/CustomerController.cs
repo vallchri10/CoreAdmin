@@ -9,7 +9,7 @@ using CoreAdmin.Domain.ExceptionModels;
 
 namespace CoreAdmin.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -21,14 +21,13 @@ namespace CoreAdmin.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Customer>> Customers_Read()
+        public async Task<IEnumerable<Customer>> CustomersRead()
         {
            return await _customerService.Customers_Read();
-
         }
 
-        [HttpGet("{CustomerID}")]
-        public async Task<Customer> Customer_Read(string CustomerID)
+        [HttpGet, Route("{CustomerID}")]
+        public async Task<ActionResult<Customer>> CustomerRead(string CustomerID)
         {
             try
             {
@@ -41,7 +40,7 @@ namespace CoreAdmin.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Customer_Create([FromBody]Customer CustomerDomain)
+        public async Task<IActionResult> CustomerCreate([FromBody]Customer CustomerDomain)
         {
             try
             {
@@ -49,13 +48,18 @@ namespace CoreAdmin.Api.Controllers
             }
             catch (SqlException ex)
             {
-                throw new ConflictException(ex.Message, $"Customer {CustomerDomain.CustomerID} already exists.");
+                if (ex.Number == 50001)
+                {
+                    throw new ConflictException(ex.Message, $"Customer {CustomerDomain.CustomerID} already exists.");
+                }
+
+                throw; 
             }
-            return CreatedAtAction("Customer_Read", new { CustomerDomain.CustomerID }, CustomerDomain);
+            return CreatedAtAction("CustomerRead", new { CustomerDomain.CustomerID }, CustomerDomain);
         }
 
-        [HttpPut("{CustomerID}")]
-        public async Task<IActionResult> Customer_Update(string CustomerID, Customer CustomerDomain)
+        [HttpPut, Route("{CustomerID}")]
+        public async Task<IActionResult> CustomerUpdate([FromRoute]string CustomerID, [FromBody]Customer CustomerDomain)
         {
             if (CustomerID != CustomerDomain.CustomerID)
             {
@@ -68,10 +72,19 @@ namespace CoreAdmin.Api.Controllers
             }
             catch (SqlException ex)
             {
-                throw new NotFoundException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
+                if (ex.Number == 50001)
+                {
+                    throw new NotFoundException(ex.Message, $"Customer with ID {CustomerID} does not exist.");
+                }
+
+                throw;
             }
             return NoContent();
         }
+
+
+
+
 
         [HttpDelete("{CustomerID}")]
         public async Task<ActionResult<Customer>> Customer_Delete(string CustomerID)

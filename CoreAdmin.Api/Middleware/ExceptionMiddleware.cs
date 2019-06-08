@@ -32,7 +32,7 @@ namespace CoreAdmin.Api.Middleware
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var response = context.Response;
-            var customException = exception as BaseCustomException;
+            var customException = exception as BaseException;
             var statusCode = (int)HttpStatusCode.InternalServerError;
             var message = "Unexpected error";
             var description = "Unexpected error";

@@ -24,8 +24,7 @@ namespace CoreAdmin.Data.DataServices.Concrete
 
         public async Task<IEnumerable<Customer>> Customers_Read()
         {
-            var Result = await _context.Set<CustomerEntity>().FromSql(
-                SQLCommands.Customers_Read).ToListAsync();
+            var Result = await _context.Customers.FromSql(SQLCommands.Customers_Read).ToListAsync();
 
             return _mapper.Map<List<Customer>>(Result);
         }
@@ -34,10 +33,7 @@ namespace CoreAdmin.Data.DataServices.Concrete
         {
             SQLParameters.CustomerID.Value = CustomerID;
 
-            var Result = await _context.Set<CustomerEntity>().FromSql(
-                SQLCommands.Customer_Read,
-                SQLParameters.CustomerID)
-                .FirstOrDefaultAsync();
+            var Result = await _context.Customers.FromSql(SQLCommands.Customer_Read, SQLParameters.CustomerID).FirstAsync(); 
 
             return _mapper.Map<Customer>(Result);
         }
@@ -49,6 +45,9 @@ namespace CoreAdmin.Data.DataServices.Concrete
             SQLParameters.LastName.Value = CustomerDomain.LastName;
             SQLParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth;
             SQLParameters.Address.Value = CustomerDomain.Address;
+            SQLParameters.City.Value = CustomerDomain.City;
+            SQLParameters.State.Value = CustomerDomain.State;
+            SQLParameters.ZipCode.Value = CustomerDomain.ZipCode; 
 
             await _context.Database.ExecuteSqlCommandAsync(
                 SQLCommands.Customer_Create,
@@ -56,7 +55,10 @@ namespace CoreAdmin.Data.DataServices.Concrete
                 SQLParameters.FirstName,
                 SQLParameters.LastName,
                 SQLParameters.DateOfBirth,
-                SQLParameters.Address);
+                SQLParameters.Address,
+                SQLParameters.City, 
+                SQLParameters.State, 
+                SQLParameters.ZipCode);
         }
 
         public async Task Customer_Update(Customer CustomerDomain)
@@ -66,6 +68,9 @@ namespace CoreAdmin.Data.DataServices.Concrete
             SQLParameters.LastName.Value = CustomerDomain.LastName;
             SQLParameters.DateOfBirth.Value = CustomerDomain.DateOfBirth;
             SQLParameters.Address.Value = CustomerDomain.Address;
+            SQLParameters.City.Value = CustomerDomain.City;
+            SQLParameters.State.Value = CustomerDomain.State;
+            SQLParameters.ZipCode.Value = CustomerDomain.ZipCode;
 
             await _context.Database.ExecuteSqlCommandAsync(
                 SQLCommands.Customer_Update,
@@ -74,7 +79,9 @@ namespace CoreAdmin.Data.DataServices.Concrete
                 SQLParameters.LastName,
                 SQLParameters.DateOfBirth,
                 SQLParameters.Address,
-                SQLParameters.ReturnCode);
+                SQLParameters.City,
+                SQLParameters.State,
+                SQLParameters.ZipCode);
         }
 
         public async Task<Customer> Customer_Delete (string CustomerID)
