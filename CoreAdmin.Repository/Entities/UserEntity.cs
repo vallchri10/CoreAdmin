@@ -1,4 +1,4 @@
-﻿namespace CoreAdmin.Data.Entities
+﻿namespace CoreAdmin.Repository.Entities
 {
     public class UserEntity
     {

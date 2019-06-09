@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace CoreAdmin.Data.Utilities
+namespace CoreAdmin.Repository.Utilities
 {
     public static class SQLParameters
     {

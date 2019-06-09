@@ -1,11 +1,11 @@
-﻿using CoreAdmin.Data.DataSources;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using CoreAdmin.Domain.DataModels;
 
-namespace CoreAdmin.Data.DataServices.Abstract
+namespace CoreAdmin.Repository.Abstract
 {
-    public interface ICustomerService
+    public interface ICustomerRepository
     {
         Task<IEnumerable<Customer>> Customers_Read();
         Task<Customer> Customer_Read(string CustomerID);

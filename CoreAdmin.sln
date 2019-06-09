@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAdmin.Api", "CoreAdmin.Api\CoreAdmin.Api.csproj", "{82F89C5E-C63F-4188-B3F2-9B1EE1491FC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAdmin.Data", "CoreAdmin.Data\CoreAdmin.Data.csproj", "{157571F5-10A0-4692-AE97-0947E7168AA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAdmin.Repository", "CoreAdmin.Repository\CoreAdmin.Repository.csproj", "{157571F5-10A0-4692-AE97-0947E7168AA1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAdmin.Domain", "CoreAdmin.Domain\CoreAdmin.Domain.csproj", "{8FDCAEF2-1C38-49BB-8FF8-DDF005E4B1E5}"
 EndProject

@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 
-using CoreAdmin.Data.DataServices.Abstract;
-using CoreAdmin.Data.DataSources;
+using CoreAdmin.Repository.Abstract;
 using CoreAdmin.Domain.DataModels;
-using CoreAdmin.Data.Entities;
-using CoreAdmin.Data.Utilities;
+using CoreAdmin.Repository.Entities;
+using CoreAdmin.Repository.Utilities;
 
-namespace CoreAdmin.Data.DataServices.Concrete
+namespace CoreAdmin.Repository.Concrete
 {
-    public class CustomerService : ICustomerService
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly CoreContext _context;
         private readonly IMapper _mapper;
 
-        public CustomerService(CoreContext context, IMapper mapper)
+        public CustomerRepository(CoreContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CoreAdmin.Data.Entities
+namespace CoreAdmin.Repository.Entities
 {
     public partial class CustomerEntity
     {

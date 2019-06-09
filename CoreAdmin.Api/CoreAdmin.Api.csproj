@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreAdmin.Data\CoreAdmin.Data.csproj" />
+    <ProjectReference Include="..\CoreAdmin.Repository\CoreAdmin.Repository.csproj" />
   </ItemGroup>
 
 </Project>

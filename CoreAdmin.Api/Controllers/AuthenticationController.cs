@@ -9,7 +9,7 @@ using System;
 using Microsoft.Extensions.Options;
 
 using CoreAdmin.Domain.DataModels;
-using CoreAdmin.Data.DataServices.Abstract;
+using CoreAdmin.Repository.Abstract;
 
 namespace CoreAdmin.Api.Controllers
 {
@@ -19,18 +19,18 @@ namespace CoreAdmin.Api.Controllers
     public class AuthenticationController : ControllerBase
     {
 
-        private IAuthenticationService _authenticationService;
+        private IAuthenticationRepository _authenticationRepository;
         private readonly AppSettings _appSettings;
 
-        public AuthenticationController(IAuthenticationService authenticationService, IOptions<AppSettings> appSettings)
+        public AuthenticationController(IAuthenticationRepository authenticationRepository, IOptions<AppSettings> appSettings)
         {
-            _authenticationService = authenticationService;
+            _authenticationRepository = authenticationRepository;
             _appSettings = appSettings.Value;
         }
 
         public IActionResult Authenticate([FromBody]User UserDomain)
         {
-            var user = _authenticationService.Authenticate(UserDomain.Username, UserDomain.Password);
+            var user = _authenticationRepository.Authenticate(UserDomain.Username, UserDomain.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });

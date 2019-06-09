@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
-using CoreAdmin.Data.DataServices.Abstract;
-using CoreAdmin.Data.DataSources;
-using CoreAdmin.Data.Utilities;
+using CoreAdmin.Repository.Abstract;
+using CoreAdmin.Repository.Utilities;
 using CoreAdmin.Domain.ExceptionModels;
 using CoreAdmin.Domain.DataModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using CoreAdmin.Data.Entities;
+using CoreAdmin.Repository.Entities;
 
-namespace CoreAdmin.Data.DataServices.Concrete
+namespace CoreAdmin.Repository.Concrete
 {
-    public class UserService : IUserService
+    public class UserRepository : IUserRepository
     {
         private readonly CoreContext _context;
         private readonly IMapper _mapper;
 
-        public UserService(CoreContext context, IMapper mapper)
+        public UserRepository(CoreContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

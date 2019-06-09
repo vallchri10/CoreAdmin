@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-using CoreAdmin.Data.DataServices.Abstract;
+using CoreAdmin.Repository.Abstract;
 using CoreAdmin.Domain.DataModels;
 using CoreAdmin.Domain.ExceptionModels;
 
@@ -13,17 +13,17 @@ namespace CoreAdmin.Api.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerRepository customerRepository)
         {
-            _customerService = customerService;
+            _customerRepository = customerRepository;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Customer>> CustomersRead()
         {
-           return await _customerService.Customers_Read();
+           return await _customerRepository.Customers_Read();
         }
 
         [HttpGet, Route("{CustomerID}")]
@@ -31,7 +31,7 @@ namespace CoreAdmin.Api.Controllers
         {
             try
             {
-                return await _customerService.Customer_Read(CustomerID);
+                return await _customerRepository.Customer_Read(CustomerID);
             }
             catch(SqlException ex)
             {
@@ -44,7 +44,7 @@ namespace CoreAdmin.Api.Controllers
         {
             try
             {
-                await _customerService.Customer_Create(CustomerDomain);
+                await _customerRepository.Customer_Create(CustomerDomain);
             }
             catch (SqlException ex)
             {
@@ -68,7 +68,7 @@ namespace CoreAdmin.Api.Controllers
 
             try
             {
-                await _customerService.Customer_Update(CustomerDomain);
+                await _customerRepository.Customer_Update(CustomerDomain);
 
                 return NoContent();
             }
@@ -84,11 +84,11 @@ namespace CoreAdmin.Api.Controllers
         }
 
         [HttpDelete("{CustomerID}")]
-        public async Task<ActionResult> CustomerDelete(string CustomerID)
+        public async Task<IActionResult> CustomerDelete(string CustomerID)
         {
             try
             {
-                await _customerService.Customer_Delete(CustomerID);
+                await _customerRepository.Customer_Delete(CustomerID);
 
                 return NoContent(); 
             }

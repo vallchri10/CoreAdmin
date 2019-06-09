@@ -1,8 +1,8 @@
-﻿using CoreAdmin.Data.Entities;
+﻿using CoreAdmin.Repository.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreAdmin.Data.DataSources
+namespace CoreAdmin.Repository
 {
     public partial class CoreContext : DbContext
     {

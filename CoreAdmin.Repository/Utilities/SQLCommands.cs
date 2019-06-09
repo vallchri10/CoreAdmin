@@ -1,4 +1,4 @@
-﻿namespace CoreAdmin.Data.Utilities
+﻿namespace CoreAdmin.Repository.Utilities
 {
     public static class SQLCommands
     {

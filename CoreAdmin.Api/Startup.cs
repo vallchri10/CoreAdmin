@@ -5,9 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using CoreAdmin.Data.DataSources;
-using CoreAdmin.Data.DataServices.Abstract;
-using CoreAdmin.Data.DataServices.Concrete;
+using CoreAdmin.Repository;
+using CoreAdmin.Repository.Abstract;
+using CoreAdmin.Repository.Concrete;
+
 using AutoMapper;
 using CoreAdmin.Api.Middleware;
 using CoreAdmin.Domain.DataModels;
@@ -54,7 +55,7 @@ namespace CoreAdmin.Api
                 {
                     OnTokenValidated = context =>
                     {
-                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
                         var userId = context.Principal.Identity.Name.ToString();
                         var user = userService.GetById(userId);
                         if (user == null)
@@ -76,9 +77,9 @@ namespace CoreAdmin.Api
                 };
             });
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

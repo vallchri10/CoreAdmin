@@ -1,19 +1,19 @@
 ﻿using AutoMapper;
 
-using CoreAdmin.Data.DataServices.Abstract;
-using CoreAdmin.Data.DataSources;
+using CoreAdmin.Repository.Abstract;
+using CoreAdmin.Repository;
 using CoreAdmin.Domain.DataModels;
-using CoreAdmin.Data.Utilities;
+using CoreAdmin.Repository.Utilities;
 using System.Linq;
 
-namespace CoreAdmin.Data.DataServices.Concrete
+namespace CoreAdmin.Repository.Concrete
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationRepository : IAuthenticationRepository
     {
         private readonly CoreContext _context;
         private readonly IMapper _mapper;
 
-        public AuthenticationService(CoreContext context, IMapper mapper)
+        public AuthenticationRepository(CoreContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

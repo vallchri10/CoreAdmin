@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CoreAdmin.Domain.DataModels;
-using CoreAdmin.Data.Entities;
+using CoreAdmin.Repository.Entities;
 
-namespace CoreAdmin.Data.Utilities
+namespace CoreAdmin.Repository.Utilities
 {
     public class AutoMapperProfile : Profile
     {

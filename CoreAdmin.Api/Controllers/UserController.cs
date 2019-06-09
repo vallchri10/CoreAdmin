@@ -9,7 +9,7 @@ using System;
 using Microsoft.Extensions.Options;
 
 using CoreAdmin.Domain.DataModels;
-using CoreAdmin.Data.DataServices.Abstract;
+using CoreAdmin.Repository.Abstract;
 
 namespace CoreAdmin.Api.Controllers
 {
@@ -18,12 +18,12 @@ namespace CoreAdmin.Api.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private IUserService _userService;
+        private IUserRepository _userRepository;
         private readonly AppSettings _appSettings;
 
-        public UserController(IUserService userService, IOptions<AppSettings> appSettings)
+        public UserController(IUserRepository userRepository, IOptions<AppSettings> appSettings)
         {
-            _userService = userService;
+            _userRepository = userRepository;
             _appSettings = appSettings.Value;
         }
 
@@ -31,7 +31,7 @@ namespace CoreAdmin.Api.Controllers
         [AllowAnonymous]
         public IActionResult User_Register([FromBody]User UserDomain)
         {
-            _userService.User_Create(UserDomain, UserDomain.Password);
+            _userRepository.User_Create(UserDomain, UserDomain.Password);
             return Ok();
         }
 
@@ -39,13 +39,13 @@ namespace CoreAdmin.Api.Controllers
         [Authorize(Roles = Role.Admin)]
         public IEnumerable<User> Users_Read()
         {
-            return _userService.Users_Read();
+            return _userRepository.Users_Read();
         }
 
         [HttpGet("{id}")]
         public IActionResult User_Read(string id)
         {
-            var user = _userService.GetById(id);
+            var user = _userRepository.GetById(id);
             return Ok(user);
         }
     }
