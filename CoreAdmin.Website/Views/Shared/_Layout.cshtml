@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebsitePractice</title>
     <partial name="wwwrootPartials/_StylesPartial" />
+    <partial name="wwwrootPartials/_ScriptsPartial" />
 </head>
 <body>
     <div class="wrapper ">
@@ -20,7 +21,7 @@
         </div>
     </div>
     <div id="applicationModals" class="modal" tabindex="-1" role="dialog"></div>
-    <partial name="wwwrootPartials/_ScriptsPartial" />
+    @*<partial name="wwwrootPartials/_ScriptsPartial" />*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>

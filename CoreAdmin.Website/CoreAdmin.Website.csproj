@@ -9,6 +9,14 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2019.2.514" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\kendo\css\Bootstrap\" />
+    <Folder Include="wwwroot\lib\kendo\css\fonts\DejaVu\" />
+    <Folder Include="wwwroot\lib\kendo\css\fonts\glyphs\" />
+    <Folder Include="wwwroot\lib\kendo\js\" />
   </ItemGroup>
 
 </Project>
