@@ -63,7 +63,7 @@ namespace CoreAdmin.Api.Controllers
         {
             if (CustomerID != CustomerDomain.CustomerID)
             {
-                return BadRequest();
+                throw new BadRequestException("Bad Request", "Check request data and resend.");
             }
 
             try

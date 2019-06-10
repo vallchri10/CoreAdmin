@@ -35,7 +35,7 @@ namespace CoreAdmin.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<CoreContext>(
                 options => options.UseSqlServer(
-                    Configuration.GetConnectionString("PadConnection")));
+                    Configuration.GetConnectionString("RigConnection")));
             services.AddCors();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
