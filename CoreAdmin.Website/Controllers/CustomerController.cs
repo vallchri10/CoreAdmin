@@ -18,10 +18,5 @@ namespace CoreAdmin.Website.Controllers
         {
             return PartialView("_Customer_Update");
         }
-
-
-
-
-
     }
 }

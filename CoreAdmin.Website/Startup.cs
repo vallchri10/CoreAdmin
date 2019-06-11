@@ -44,7 +44,7 @@ namespace CoreAdmin
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Dashboard}/{action=Dashboard}/{id?}");
+                    template: "{controller=Customer}/{action=CustomerListing}/{id?}");
             });
         }
     }
