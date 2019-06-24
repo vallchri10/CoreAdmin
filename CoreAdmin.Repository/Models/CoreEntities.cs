@@ -1,31 +1,31 @@
-﻿using CoreAdmin.Repository.Entities;
-
+﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CoreAdmin.Repository
+namespace CoreAdmin.Api.Models
 {
-    public partial class CoreContext : DbContext
+    public partial class CoreEntities : DbContext
     {
-        public CoreContext()
+        public CoreEntities()
         {
         }
 
-        public CoreContext(DbContextOptions<CoreContext> options)
+        public CoreEntities(DbContextOptions<CoreEntities> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<CustomerEntity> Customers { get; set; }
-        public virtual DbSet<EmployeeRoleEntity> EmployeeRole { get; set; }
-        public virtual DbSet<EmployeesEntity> Employees { get; set; }
-        public virtual DbSet<RolesEntity> Roles { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<EmployeeRole> EmployeeRole { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity<CustomerEntity>(entity =>
+            modelBuilder.Entity<Customers>(entity =>
             {
                 entity.HasKey(e => e.CustomerId);
 
@@ -49,7 +49,7 @@ namespace CoreAdmin.Repository
                 entity.Property(e => e.ZipCode).HasMaxLength(15);
             });
 
-            modelBuilder.Entity<EmployeeRoleEntity>(entity =>
+            modelBuilder.Entity<EmployeeRole>(entity =>
             {
                 entity.Property(e => e.EmployeeRoleId)
                     .HasColumnName("EmployeeRoleID")
@@ -73,7 +73,7 @@ namespace CoreAdmin.Repository
                     .HasConstraintName("FK_EmployeeRole_Employees");
             });
 
-            modelBuilder.Entity<EmployeesEntity>(entity =>
+            modelBuilder.Entity<Employees>(entity =>
             {
                 entity.HasKey(e => e.EmployeeId)
                     .HasName("PK_Users");
@@ -90,7 +90,7 @@ namespace CoreAdmin.Repository
                 entity.Property(e => e.Username).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<RolesEntity>(entity =>
+            modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
                     .HasName("PK_RoleID");

@@ -61,8 +61,5 @@ namespace CoreAdmin.Repository.Concrete
             return _mapper.Map<User>(Result);
         }
 
-
-
-
     }
 }
