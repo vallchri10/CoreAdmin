@@ -21,65 +21,30 @@ namespace CoreAdmin.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<CoreContext>(
-                options => options.UseSqlServer(
-                    Configuration.GetConnectionString("RigConnection")));
-            services.AddCors();
+            services
+                .AddAutoMapper();
 
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            services
+                .AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services
+                .AddDbContext<CoreContext>(options => options
+                .UseSqlServer(Configuration.GetConnectionString("RigConnection")));
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = context =>
-                    {
-                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-                        var userId = context.Principal.Identity.Name.ToString();
-                        var user = userService.GetById(userId);
-                        if (user == null)
-                        {
-                            // return unauthorized if user no longer exists
-                            context.Fail("Unauthorized");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            services
+                .AddCors();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services
+                .AddScoped<ICustomerRepository, CustomerRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -96,10 +61,6 @@ namespace CoreAdmin.Api
             app.UseHttpsRedirection();
 
             //app.UseCors(options => options.WithOrigins("https://localhost:44375").AllowAnyMethod());
-
-
-
-
 
             app.UseCors(x => x
               .AllowAnyOrigin()

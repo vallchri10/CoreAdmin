@@ -1,5 +1,6 @@
 ﻿using CoreAdmin.Repository.Abstract;
 using CoreAdmin.Repository.Utilities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,17 @@ namespace CoreAdmin.Repository.Concrete
 {
     public class AccountRepository : IAccountRepository
     {
+        private SignInManager<IdentityUser> _signManager;
+        private UserManager<User> _userManager;
+
+        public AccountRepository()
+        {
+
+        }
+
+
+
+        
         public void Register_Employee()
         {
 

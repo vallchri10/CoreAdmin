@@ -15,30 +15,11 @@ namespace CoreAdmin.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-
         private IAccountRepository _accountRepository;
-        private readonly AppSettings _appSettings;
 
-        public AccountController(IAccountRepository accountRepository, IOptions<AppSettings> appSettings)
+        public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-            _appSettings = appSettings.Value;
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Register([FromBody]User UserDomain)
-        {
-            //_accountRepository//.User_Create(UserDomain, UserDomain.Password);
-            return Ok();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Login([FromBody]User UserDomain)
-        {
-            //_accountRepository//.User_Create(UserDomain, UserDomain.Password);
-            return Ok();
         }
     }
 }

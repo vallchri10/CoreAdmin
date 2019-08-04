@@ -9,7 +9,6 @@ namespace CoreAdmin.Repository.Utilities
         public AutoMapperProfile()
         {
             CreateMap<CustomerEntity, Customer>();
-            CreateMap<UserEntity, User>();
         }
     }
 }

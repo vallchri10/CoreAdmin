@@ -17,12 +17,5 @@ namespace CoreAdmin.Repository.Utilities
         {
             Direction = ParameterDirection.Output
         };
-
-        public static SqlParameter UserID = new SqlParameter("@UserID", SqlDbType.NVarChar);
-        public static SqlParameter UserRole = new SqlParameter("@UserRole", SqlDbType.NVarChar);
-        public static SqlParameter Username = new SqlParameter("@Username", SqlDbType.NVarChar);
-
-        public static SqlParameter PasswordHash = new SqlParameter("@PasswordHash", SqlDbType.Binary);
-        public static SqlParameter PasswordSalt = new SqlParameter("@PasswordSalt", SqlDbType.Binary);
     }
 }
