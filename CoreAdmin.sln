@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAdmin.RazorWebsite", "C
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CoreAdmin.Database", "CoreDatabase\CoreAdmin.Database.sqlproj", "{DBF4DE5D-DDE3-4E50-BF66-2F4B8E1272BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreAdmin.AngularWebsite", "CoreAdmin.AngularWebsite\CoreAdmin.AngularWebsite.csproj", "{F226BC1B-DFBB-403F-BDF1-86C142F0425D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,10 +41,6 @@ Global
 		{DBF4DE5D-DDE3-4E50-BF66-2F4B8E1272BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF4DE5D-DDE3-4E50-BF66-2F4B8E1272BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DBF4DE5D-DDE3-4E50-BF66-2F4B8E1272BE}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F226BC1B-DFBB-403F-BDF1-86C142F0425D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F226BC1B-DFBB-403F-BDF1-86C142F0425D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F226BC1B-DFBB-403F-BDF1-86C142F0425D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F226BC1B-DFBB-403F-BDF1-86C142F0425D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
